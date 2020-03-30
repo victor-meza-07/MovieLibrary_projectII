@@ -20,39 +20,43 @@ namespace WebAPISample.Controllers
         }
         // GET api/movie
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
             // Retrieve all movies from db logic
-            return new string[] { "movie1 string", "movie2 string" };
+            return Ok(new string[] { "movie1 string", "movie2 string" });
         }
 
         // GET api/movie/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
             // Retrieve movie by id from db logic
-            return "value";
+            // return Ok(movie);
+            return Ok();
         }
 
         // POST api/movie
         [HttpPost]
-        public void Post([FromBody]Movie value)
+        public IActionResult Post([FromBody]Movie value)
         {
             // Create movie in db logic
+            return Ok();
         }
 
-        // PUT api/movie/5
+        // PUT api/movie
         [HttpPut]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put([FromBody] Movie movie)
         {
             // Update movie in db logic
+            return Ok();
         }
 
         // DELETE api/movie/5
-        [HttpDelete]
-        public void Delete(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
             // Delete movie from db logic
+            return Ok();
         }
     }
 }
