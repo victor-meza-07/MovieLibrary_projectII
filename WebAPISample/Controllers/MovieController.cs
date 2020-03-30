@@ -35,7 +35,7 @@ namespace WebAPISample.Controllers
 
             //sample logic
             var MovieReturned = _context.Movies.Where(a => a.MovieId == id).FirstOrDefault(); //returns a movie object
-            var ImagesForMovie = _context.MovieImages.Where(i => i.MovieId == MovieReturned.MovieId);//returns an image collection. 
+            var ImageForMovie = _context.MovieImages.Where(i => i.MovieId == MovieReturned.MovieId).FirstOrDefault();//returns an image collection. 
             return Ok();
         }
 
