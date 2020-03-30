@@ -1,21 +1,64 @@
+@font-face
+{
+    font-family: MovieLover;
+    src: url(../Resources/blockletter.regular.otf);
+}
+
 body 
 {
     background-color: #333333;
 }
 
 
-.contentContainer
+.contentContainerStyle
 {
-    margin-top: 10%;   
-    max-width: 80%;
-    max-height: 90%;
-
-    border-radius: 10px;
-    background: #333333;
-    box-shadow: 17px 12px 20px #000000, -7px 4px 20px #828282;
+    margin-top: 5em;   
+    border-radius: 20px;
+    box-shadow: 13px 20px 20px 3px #000000, -6px -6px 10px #828282;
+    min-width: 90%;
 }
 
 .AddMovieForm
 {
+    max-width: 95%;
+    color: white;
+    font-size: 1.5em;
+}
+
+.WebsiteTitle
+{
+    font-size: 3em;
+    font-weight: 500;
+    font-family: MovieLover;
     color: white;
 }
+
+.title-container
+{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.466);
+    box-shadow: 18px 5px 20px 3px #000000;
+
+}
+
+
+
+/* CARD STYLES */
+.DiplsayMovieCard-container
+{
+    padding: 10px;
+    overflow: hidden;
+}
+.customCard
+{
+    width: 100%;
+    background-color: #333333;
+    color: white;
+    text-align: center;
+}
+.customCard-image
+{
+    min-width: 100%;
+    min-height: auto;
+}
+/*END CARD STYLES*/
