@@ -19,5 +19,6 @@ namespace WebAPISample.Data
         }
 
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<MovieImagesModel> MovieImages { get; set; }
     }
 }

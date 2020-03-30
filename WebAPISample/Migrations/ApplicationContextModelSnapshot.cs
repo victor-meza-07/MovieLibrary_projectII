@@ -38,6 +38,24 @@ namespace WebAPISample.Migrations
 
                     b.ToTable("Movies");
                 });
+
+            modelBuilder.Entity("WebAPISample.Models.MovieImagesModel", b =>
+                {
+                    b.Property<int>("PrimaryKey")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PrimaryKey");
+
+                    b.ToTable("MovieImages");
+                });
 #pragma warning restore 612, 618
         }
     }
