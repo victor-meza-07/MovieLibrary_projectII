@@ -25,6 +25,8 @@ body
     font-size: 1.5em;
 }
 
+
+/* TITLE STYLES */
 .WebsiteTitle
 {
     font-size: 3em;
@@ -32,7 +34,6 @@ body
     font-family: MovieLover;
     color: white;
 }
-
 .title-container
 {
     text-align: center;
@@ -40,7 +41,7 @@ body
     box-shadow: 18px 5px 20px 3px #000000;
 
 }
-
+/* END TITLE STYLES */
 
 
 /* CARD STYLES */
@@ -60,5 +61,11 @@ body
 {
     min-width: 100%;
     min-height: auto;
+}
+.customCard-button
+{
+    border-radius: 10px;
+    background: #dc3545;
+    box-shadow: inset 3px 3px 5px #5d151c, inset -20px -20px 60px #ff4053;
 }
 /*END CARD STYLES*/
