@@ -32,6 +32,10 @@ namespace WebAPISample.Controllers
         {
             // Retrieve movie by id from db logic
             // return Ok(movie);
+
+            //sample logic
+            var MovieReturned = _context.Movies.Where(a => a.MovieId == id).FirstOrDefault(); //returns a movie object
+            var ImagesForMovie = _context.MovieImages.Where(i => i.MovieId == MovieReturned.MovieId);//returns an image collection. 
             return Ok();
         }
 

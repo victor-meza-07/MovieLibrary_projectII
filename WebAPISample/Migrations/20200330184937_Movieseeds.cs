@@ -6,10 +6,6 @@ namespace WebAPISample.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Genre",
-                table: "Movies",
-                nullable: true);
 
             migrationBuilder.InsertData(
                 table: "Movies",
