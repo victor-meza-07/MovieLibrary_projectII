@@ -6,7 +6,7 @@
     <title>Movie Lover</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
@@ -25,7 +25,56 @@
 
 <!-- Dynamic Content Here -->
 <div class="container-fluid" id="dynamicContent">
-    
+    <div class="contentContainerStyle">
+        <div class="homeContainer">
+            <div class="randomPickContainer">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="randompickHeader-container">
+                            <h1 class="randompickHeader">Random Picks</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-container">
+                <img id="featured-img" class="featured-img" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg">
+                <button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button>
+            </div>
+            <div class="navigation-container">
+                <nav>
+                    <ul class="nav nav-pills nav-justified navigation-ul">
+                        <li class="nav-item navigation-li"><button class="navigation-btn" onclick="NavigatoHomeView()"><i class="fa">&#xf015;</i></button></li>
+                        <li class="nav-item navigation-li"><button class="navigation-btn" onclick="NavigateToSearchView()"><i class="fa fa-search" aria-hidden="true"></i></button></li>
+                        <li class="nav-item navigation-li"><button class="navigation-btn" onclick="NavigateToLibraryView()"><i class="fa fa-list" aria-hidden="true"></i></button></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- END DYNAMIC CONTENT-->
 <button><a href="vic_test.html">Test</a></button>

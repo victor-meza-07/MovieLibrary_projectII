@@ -23,7 +23,41 @@
     <!-- Dynamic Content Here -->
     <div class="container-fluid" id="dynamicContent">
         <!-- TEST CONTENT HERE -->
-        
+        <div class="contentContainerStyle">
+            <div class="homeContainer">
+                <div class="search-container">
+                    <form>
+                        <div class="row justify-content-center">
+                            <label class="search-title">Search For A Movie</label>
+                        </div>
+                        <div class="search-box-group">
+                            <input type="search" class="search-box-style" placeholder="Search By Title" id="MovieTitleSearch">
+                            <br>
+                            <input type="search" class="search-box-style" placeholder="Search By Genre" id="MovieTitleGenre">
+                            <br>
+                            <input type="search" class="search-box-style" placeholder="Search By Director" id="MovieTitleDirector">
+                            <br>
+                            <button type="button" class="btn btn-danger search-group-btn" onclick="ADDFUNCTIONHERE()"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="custom-table-container">
+                    <div class="row justify-content-center">
+                        <table class="table-dark table-hover custom-table-style">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- THIS IS WHERE THE DATA NEEDS TO BE ITERATED!!!!-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- END TEST CONTENT HERE -->
     </div>
 
@@ -107,7 +141,7 @@
 -->
 
 <!-- NAV HTML-->
-<!--
+<!-- ADD THIS INSIDE HomeContainer DIV
                 <div class="navigation-container">
                 <nav>
                     <ul class="nav nav-pills nav-justified navigation-ul">
@@ -119,5 +153,42 @@
             </div>
 -->
 
-
+<!-- SEARCH HTML-->
+<!--
+    <div class="contentContainerStyle">
+            <div class="homeContainer">
+                <div class="search-container">
+                    <form>
+                        <div class="row justify-content-center">
+                            <label class="search-title">Search For A Movie</label>
+                        </div>
+                        <div class="search-box-group">
+                            <input type="search" class="search-box-style" placeholder="Search By Title" id="MovieTitleSearch">
+                            <br>
+                            <input type="search" class="search-box-style" placeholder="Search By Genre" id="MovieTitleGenre">
+                            <br>
+                            <input type="search" class="search-box-style" placeholder="Search By Director" id="MovieTitleDirector">
+                            <br>
+                            <button type="button" class="btn btn-danger search-group-btn" onclick="ADDFUNCTIONHERE()"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="custom-table-container">
+                    <div class="row justify-content-center">
+                        <table class="table-dark table-hover custom-table-style">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            // THIS IS WHERE THE DATA NEEDS TO BE ITERATED!!!! //
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
 
