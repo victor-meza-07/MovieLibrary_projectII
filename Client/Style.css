@@ -18,11 +18,93 @@ body
     min-width: 90%;
 }
 
-.AddMovieForm
+
+
+/* Home View Styles */
+.homeContainer
 {
-    max-width: 95%;
-    color: white;
+    width: 95%;
+    height: 95%;
+    background-image: radial-gradient(circle, rgb(74, 85, 115, .80)1%, #333333 48%);
+    padding: 5px;
+    border-radius: 20px;
+}
+.randomPickContainer
+{
+    height: 40%;
+    width: 100%;
+    overflow: hidden;
+}
+.randomtitle-container
+{
+    background-color: rgba(0, 0, 0, 0.466);
+    padding-left:5px;
+    padding-bottom: 0px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.randomPickTitle
+{
+    color:white;
+    font-size: .8em;
+}
+.randompickHeader
+{
+    color:white;
     font-size: 1.5em;
+    font-family: Helvetica;
+}
+.randompickHeader-container
+{
+    text-align: center;
+}
+.featured-container
+{
+    margin-top: 2em;
+    margin-left: 2%;
+    height: 40%;
+    width: 100%;
+    overflow: hidden;
+}
+.featured-img
+{
+    height: auto;
+    width: 100%;
+}
+.feautred-btn
+{
+    margin-top: 10px;
+    border-radius: 20px;
+    background: #007bff;
+    box-shadow: inset 2px 3px 0px #0061c9, inset -20px -20px 60px #0095ff;
+}
+.navigation-container
+{
+    height: 3em;
+    margin-top: 40px;
+    background-color:#1f1f1f;
+    border-radius: 20px;
+}
+.navigation-li
+{
+    color: white;
+    list-style: none;
+    float: left;
+    margin-top: .5em;
+}
+.navigation-ul
+{
+    text-align: center;
+}
+.navigation-btn
+{
+    font-size: 1.5em;
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    border-style: none;
 }
 
 
