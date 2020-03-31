@@ -22,8 +22,9 @@ namespace WebAPISample.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            List<Movie> movies = _context.Movies.Where(s => s.MovieId > 0).ToList();
             // Retrieve all movies from db logic
-            return Ok(new string[] { "movie1 string", "movie2 string" });
+            return Ok(movies);
         }
 
         // GET api/movie/5
@@ -59,6 +60,10 @@ namespace WebAPISample.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            Movie movie = _context.Movies.Where(s => s.MovieId ==id).FirstOrDefault();
+            _context.Remove(movie);
+            _context.SaveChanges();
+                
             // Delete movie from db logic
             return Ok();
         }

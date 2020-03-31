@@ -7,6 +7,7 @@ namespace WebAPISample.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
 
+
             migrationBuilder.InsertData(
                 table: "Movies",
                 columns: new[] { "MovieId", "Director", "Genre", "Title" },

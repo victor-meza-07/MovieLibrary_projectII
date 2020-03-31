@@ -5,7 +5,8 @@ var temporaryImage = "https://www.istockphoto.com/resources/images/PhotoFTLP/Ess
     function processForm( e ){
         var dict = {
         	Title : this["title"].value,
-        	Director: this["director"].value
+            Director: this["director"].value,
+            Genre: this ["Genre"].value
         };
 
         $.ajax({
