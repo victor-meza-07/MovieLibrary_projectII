@@ -1,15 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>jQuery AJAX POST Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta lang="en">
+    <title>Movie Lover</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Style.css">
 </head>
 <body>
+<div class="row justify-content-center">
+    <div class="container-fluid">
+        <div class="title-container">
+            <h1 class="WebsiteTitle">Movie Lover</h1>
+         </div>
+    </div>
+</div>
+
 
 <div id="response">
     <pre></pre>
 </div>
 
+<!-- Dynamic Content Here -->
+<div class="container-fluid" id="dynamicContent">
+    <div class="contentContainerStyle">
+        <div class="homeContainer">
+            <div class="randomPickContainer">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="randompickHeader-container">
+                            <h1 class="randompickHeader">Random Picks</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="randomtitle-container">
+                            <p class="randomPickTitle">Movie title</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-container">
+                <img id="featured-img" class="featured-img" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg">
+                <button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button>
+            </div>
+            <div class="navigation-container">
+                <nav>
+                    <ul class="nav nav-pills nav-justified navigation-ul">
+                        <li class="nav-item navigation-li"><button class="navigation-btn" onclick="NavigatoHomeView()"><i class="fa">&#xf015;</i></button></li>
+                        <li class="nav-item navigation-li"><button class="navigation-btn" onclick="NavigateToSearchView()"><i class="fa fa-search" aria-hidden="true"></i></button></li>
+                        <li class="nav-item navigation-li"><button class="navigation-btn" onclick="NavigateToLibraryView()"><i class="fa fa-list" aria-hidden="true"></i></button></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END DYNAMIC CONTENT-->
+<button><a href="vic_test.html">Test</a></button>
+
+<!-- Will live in that dynamic content soon -->
 <form id="my-form">
     <input type="text" name="title" placeholder="Title" />
     <input type="text" name="director" placeholder="Director" />
@@ -17,7 +87,13 @@
     <button type="submit">Submit</button>
 </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="./app.js"></script>
+
 </body>
+<section>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+</section>
 </html>

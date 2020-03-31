@@ -6,7 +6,10 @@ namespace WebAPISample.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+<<<<<<< HEAD
            
+=======
+>>>>>>> 8be0661f7d2e354059632cdaa5c6a1dd9f59d0c3
 
             migrationBuilder.InsertData(
                 table: "Movies",
