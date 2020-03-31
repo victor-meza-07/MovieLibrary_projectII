@@ -35,6 +35,21 @@ function NavigateToHomeView()
     let homeView_html = GenerateHomeViewHtml();
     DisplayView(homeView_html);
 }
+function NavigateToSearchView()
+{
+
+}
+function NavigateToLibraryView()
+{
+
+}
+/*
+TODO:
+Add: NavigateTo Search/Library View and supporting generate methods
+Add: .Get//Retrieve .Post//Add .Put//Edit and .remove//Delete methods
+*/
+
+
 
 function GenerateHomeViewHtml()
 {
@@ -51,7 +66,6 @@ function GenerateHomeViewHtml()
     homeViewHtml = `<div class="contentContainerStyle"><div class="homeContainer">${randomPicker_html}${featuredFilm_html}${navigation_html}</div></div>`;
     return homeViewHtml;
 }
-
 function GenerateNavigationHTML()
 {
     let html = `<div class="navigation-container">`+
@@ -71,8 +85,10 @@ function GenerateNavigationHTML()
 function GenerateFeaturedFilmHTML()
 {
     let html = ``;
+    let title = `<div class="featured-title-container"><h1 class="featured-title">Featured Film</h1></div>`;
     let movie_obj = GetMovieObject();
     html = `<div class="featured-container">`+
+            `${title}`+
             `<img id="featured-img" class="featured-img" src="${movie_obj.ImageURL}">`+
             `<button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button></div>`;
     return html;

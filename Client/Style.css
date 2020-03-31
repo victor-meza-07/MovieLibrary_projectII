@@ -12,10 +12,11 @@ body
 
 .contentContainerStyle
 {
-    margin-top: 5em;   
+    margin-top: 5em;
+    margin-left: 15%;   
     border-radius: 20px;
     box-shadow: 13px 20px 20px 3px #000000, -6px -6px 10px #828282;
-    min-width: 90%;
+    width: 70%;
 }
 
 
@@ -111,6 +112,15 @@ body
     height: 40%;
     width: 100%;
     overflow: hidden;
+}
+.featured-title
+{
+    color:white;
+    font-size: 20pt;
+}
+.featured-title-container
+{
+    text-align: center;
 }
 .featured-img
 {
