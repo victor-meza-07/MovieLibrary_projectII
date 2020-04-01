@@ -1,4 +1,4 @@
-var temporaryImage = "https://www.istockphoto.com/resources/images/PhotoFTLP/Essential-images-we-love-1055891344.jpg";
+var temporaryImage = "https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
 
 
 (function($){
@@ -175,11 +175,27 @@ function GenerateFeaturedFilmHTML()
 }
 function GetMovieObject()
 {
+    //TESTING//
+    var dict = {
+        
+    };
+    sample_obj = $.get(`https://localhost:44325/api/movie`,function(data)
+    {
+        console.log(data);
+    });
+
+
+
     let movieObject = {ImageURL: temporaryImage};
-    //TODO:
-    //.get jquery function to be exact.
-    //this is where we write some more ajax request functions;
+    
     return movieObject;
+}
+function CreateCollectionOfMovies()
+{
+    let MovieCollection = {Movies: [], Images: []};
+    let movie_obj = GetMovieObject(id);
+    MovieCollection.Movies.push(movie_obj);
+    //Getting IDs
 }
 function GenerateRandomPcikerHTML()
 {
