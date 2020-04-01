@@ -176,11 +176,17 @@ async function GenerateFeaturedFilmHTML()
 async function GetMovieObject()
 {
     //TESTING//
-    let sample_obj = await jQuery.get(`https://localhost:44325/api/movie`);
-    let number = RandomInteger(0,2);
-    console.log("Outside the function", sample_obj);
-    let movieObject = {movie: sample_obj[number], ImageURL: temporaryImage}
-    console.log(movieObject);
+    let movies_obj = await jQuery.get(`https://localhost:44325/api/movie`);
+    
+    let movieIndex = RandomInteger(0,2);
+    
+    let images_obj = await jQuery.getImage(`https://localhost:44325/api/movie/${movieIndex}`);
+    
+    console.log("movies_obj", movies_obj);
+    console.log("images_obj", images_obj);
+    
+    let movie_obj = {movie: movies_obj[movieIndex], Images: images_obj}
+    console.log(movie_obj);
     
     return movieObject;
 }
