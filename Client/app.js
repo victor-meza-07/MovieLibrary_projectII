@@ -280,6 +280,16 @@ function DeleteMethod(){
         method: "DELETE"
     })
 }
+function GetMovieFromTitle(){
+    title=$("#title").val();
+    $.ajax({
+        url:"https://localhost:44325/api/movie/"+ title,
+        method:"GetMovieFromTitle"
+
+    })
+
+}
+
 
 
 
