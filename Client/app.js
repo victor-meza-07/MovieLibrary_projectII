@@ -1,4 +1,4 @@
-var temporaryImage = "https://www.istockphoto.com/resources/images/PhotoFTLP/Essential-images-we-love-1055891344.jpg";
+var temporaryImage = "https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
 
 
 (function($){
@@ -38,11 +38,19 @@ function NavigateToHomeView()
 }
 function NavigateToSearchView()
 {
+    let searchView_html = GenerateSearchViewHtml();
+    DisplayView(searchView_html);
 
 }
 function NavigateToLibraryView()
 {
-
+    let libraryView_html = GenerateLibraryViewHTML();
+    DisplayView(libraryView_html);
+}
+function NavigateToDetailsView()
+{
+    let details_html = GenerateDetailsViewHTML();
+    DisplayView(details_html);
 }
 /*
 TODO:
@@ -51,7 +59,25 @@ Add: .Get//Retrieve .Post//Add .Put//Edit and .remove//Delete methods
 */
 
 
+function GenerateSearchViewHtml()
+{
+    let form_html = GenerateSearch_FormHtml();
+    let table_html = GenerateSearch_tableHTML();
+    let div1_html = `<div class="search-container">${form_html}</div>`;
+    let div2_html = ` <div class="custom-table-container">${table_html}</div>`;
 
+
+    let html = ``;
+    return html;
+}
+function GenerateLibraryViewHTML()
+{
+
+}
+function GenerateDetailsViewHTML()
+{
+
+}
 function GenerateHomeViewHtml()
 {
     let homeViewHtml = ``;
@@ -66,6 +92,59 @@ function GenerateHomeViewHtml()
     
     homeViewHtml = `<div class="contentContainerStyle"><div class="homeContainer">${randomPicker_html}${featuredFilm_html}${navigation_html}</div></div>`;
     return homeViewHtml;
+}
+
+
+function GenerateTable_html(CollectionOfMovies, CollectionOfTableHead)
+{
+    let table_head = `<thead><tr>`;
+    for(let i =0; i < CollectionOfTableHead.length; i++)
+    {
+        tablehead += `<th>${CollectionOfTableHead[i]}</th>`;
+    }
+    tablehead += `</tr></thead>`;
+
+
+    let table_body = `<tbody>`;
+    let rows = CollectionOfMovies.length;
+    let columns = CollectionOfTableHead.length;
+    for(let i = 0; i < rows; i++)
+    {
+        table_body += `<tr>`;
+        for(let j = 0; j < columns; j++)
+        {
+            let property = CollectionOfTableHead[j]; // will probably need something to parse out those properties exactly.
+            table_body += `<td>${CollectionOfMovies[i][property]}</td>`; // this line of code should access the specific property at n line. 
+        }
+        table_body += `</tr>`;
+    }
+    table_body += `</tbody>`;
+
+    let full_html = `${table_head, table_body}`;
+    return full_html;
+}
+function GenerateSearch_tableHTML(CollectionOfMovies)
+{
+    let tablehead = ["Title","Details"];
+
+    let table_html = GenerateTable_html(CollectionOfMovies,tablehead);
+    let custom_table_html = `<table class="table-dark table-hover custom-table-style">${table_html}</div>`;
+    let final_html = `<div class="row justify-content-center">${custom_table_html}</div>`;
+    return final_html;
+}
+function GenerateSearch_FormHtml()
+{
+    let div1_html = `<div class="row justify-content-center"><label class="search-title">Search For A Movie</label></div>`;
+    let div2_html = `<div class="search-box-group">`+
+    `<input type="search" class="search-box-style" placeholder="Search By Title" id="MovieTitleSearch">`+
+    `<br>`+
+    `<input type="search" class="search-box-style" placeholder="Search By Genre" id="MovieTitleGenre">`+
+    `<br>`+
+    `<input type="search" class="search-box-style" placeholder="Search By Director" id="MovieTitleDirector">`+
+    `<br>`+
+    `<button type="button" class="btn btn-danger search-group-btn" onclick="ADDFUNCTIONHERE()"><i class="fa fa-search" aria-hidden="true"></i> Search</button></div>`;
+    let html = `<form>${div1_html, div2_html}</form>`;
+    return html;
 }
 function GenerateNavigationHTML()
 {
@@ -96,11 +175,27 @@ function GenerateFeaturedFilmHTML()
 }
 function GetMovieObject()
 {
+    //TESTING//
+    var dict = {
+        
+    };
+    sample_obj = $.get(`https://localhost:44325/api/movie`,function(data)
+    {
+        console.log(data);
+    });
+
+
+
     let movieObject = {ImageURL: temporaryImage};
-    //TODO:
-    //.get jquery function to be exact.
-    //this is where we write some more ajax request functions;
+    
     return movieObject;
+}
+function CreateCollectionOfMovies()
+{
+    let MovieCollection = {Movies: [], Images: []};
+    let movie_obj = GetMovieObject(id);
+    MovieCollection.Movies.push(movie_obj);
+    //Getting IDs
 }
 function GenerateRandomPcikerHTML()
 {
@@ -127,7 +222,6 @@ function GenerateRandomCollection(NumberOfrandomPicks)
 
     return randomCollection;
 }
-
 
 function DisplayView(html)
 {
