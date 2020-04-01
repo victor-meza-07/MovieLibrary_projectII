@@ -31,9 +31,9 @@ var temporaryImage = "https://images.pexels.com/photos/814499/pexels-photo-81449
 })(jQuery);
 
 
-function NavigateToHomeView()
+async function NavigateToHomeView()
 {
-    let homeView_html = GenerateHomeViewHtml();
+    let homeView_html = await GenerateHomeViewHtml();
     DisplayView(homeView_html);
 }
 function NavigateToSearchView()
@@ -78,7 +78,7 @@ function GenerateDetailsViewHTML()
 {
 
 }
-function GenerateHomeViewHtml()
+async function GenerateHomeViewHtml()
 {
     let homeViewHtml = ``;
     //start from the inside and work your way out.
@@ -86,7 +86,7 @@ function GenerateHomeViewHtml()
         //Random Picker
         let randomPicker_html = GenerateRandomPcikerHTML();
         //Add Featured Conetent
-        let featuredFilm_html = GenerateFeaturedFilmHTML();
+        let featuredFilm_html = await GenerateFeaturedFilmHTML();
         //Add Navigation
         let navigation_html = GenerateNavigationHTML();
     
@@ -162,31 +162,24 @@ function GenerateNavigationHTML()
                 `</div></div></div></div>`;
     return html;
 } 
-function GenerateFeaturedFilmHTML()
+async function GenerateFeaturedFilmHTML()
 {
     let html = ``;
     let title = `<div class="featured-title-container"><h1 class="featured-title">Featured Film</h1></div>`;
-    let movie_obj = GetMovieObject();
+    let movie_obj = await GetMovieObject();
     html = `<div class="featured-container">`+
             `${title}`+
             `<img id="featured-img" class="featured-img" src="${movie_obj.ImageURL}">`+
             `<button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button></div>`;
     return html;
 }
-function GetMovieObject()
+async function GetMovieObject()
 {
     //TESTING//
-    var dict = {
-        
-    };
-    sample_obj = $.get(`https://localhost:44325/api/movie`,function(data)
-    {
-        console.log(data);
-    });
-
-
-
-    let movieObject = {ImageURL: temporaryImage};
+    let sample_obj = await jQuery.get(`https://localhost:44325/api/movie`);
+    console.log("Outside the function", sample_obj);
+    let movieObject = {ImageURL: temporaryImage}
+    console.log(movieObject);
     
     return movieObject;
 }
