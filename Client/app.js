@@ -229,5 +229,14 @@ function DisplayView(html)
 
 }
 
-$("Delete").get()   
+function DeleteMethod(){
+    movieId = $("#Movieid").val();
+    $.ajax({
+        url: "https://localhost:44325/api/movie/" + movieId,
+        method: "DELETE"
+    })
+}
+
+
+
 
