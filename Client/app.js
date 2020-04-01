@@ -165,8 +165,8 @@ function GenerateNavigationHTML()
 async function GenerateFeaturedFilmHTML()
 {
     let html = ``;
-    let title = `<div class="featured-title-container"><h1 class="featured-title">Featured Film</h1></div>`;
     let movie_obj = await GetMovieObject();
+    let title = `<div class="featured-title-container"><h1 class="featured-title">${movie_obj.movie.title}</h1></div>`;
     html = `<div class="featured-container">`+
             `${title}`+
             `<img id="featured-img" class="featured-img" src="${movie_obj.ImageURL}">`+
@@ -177,8 +177,9 @@ async function GetMovieObject()
 {
     //TESTING//
     let sample_obj = await jQuery.get(`https://localhost:44325/api/movie`);
+    let number = RandomInteger(0,2);
     console.log("Outside the function", sample_obj);
-    let movieObject = {ImageURL: temporaryImage}
+    let movieObject = {movie: sample_obj[number], ImageURL: temporaryImage}
     console.log(movieObject);
     
     return movieObject;
@@ -219,4 +220,16 @@ function GenerateRandomCollection(NumberOfrandomPicks)
 function DisplayView(html)
 {
     document.getElementById("dynamicContent").innerHTML=html;
+}
+
+/**
+ * @param {Number} min 
+ * @param {Number} max
+ * @returns {Number} Returns a random number between min (inclusive) and max (exclusive) 
+ */
+function RandomInteger(min, max)
+{
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
