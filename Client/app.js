@@ -1,5 +1,5 @@
 var temporaryImage = "https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-
+var apiUrl= "https://localhost:44325/api/movie"
 
 (function($){
     function processForm( e ){
@@ -229,6 +229,16 @@ function DeleteMethod(){
         method: "DELETE"
     })
 }
+function GetMovieFromTitle(){
+    title=$("#title").val();
+    $.ajax({
+        url:"https://localhost:44325/api/movie/"+ title,
+        method:"GetMovieFromTitle"
+
+    })
+
+}
+
 
 
 

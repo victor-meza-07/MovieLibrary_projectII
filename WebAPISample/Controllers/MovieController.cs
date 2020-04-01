@@ -66,7 +66,7 @@ namespace WebAPISample.Controllers
         // DELETE api/movie/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-        /4{
+        {
             Movie movie = _context.Movies.Where(s => s.MovieId ==id).FirstOrDefault();
             _context.Remove(movie);
             _context.SaveChanges();
@@ -85,7 +85,17 @@ namespace WebAPISample.Controllers
             var ImageForMovie = _context.MovieImages.Where(i => i.MovieId == id).ToList();//returns an image collection. 
             return Ok(ImageForMovie);
         }
+        [HttpGet("{title}")]
+        public IActionResult GetMovieFromTitle(string title)
+        {
+            // Retrieve movie by title from db logic
+            // return Ok(movie);
 
-      
+            //sample logic
+
+            var Movie = _context.Movies.Where(s => s.Title == title).ToList();//returns an image collection. 
+            return Ok(Movie);
+        }
+
     }
 }
