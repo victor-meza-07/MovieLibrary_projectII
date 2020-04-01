@@ -105,6 +105,16 @@ body
 {
     text-align: center;
 }
+.random-pick-button
+{
+    border-radius: 20px;
+    font-size: 1em;
+    background-color: rgba(0, 0, 0, 0.466);
+    border-color: rgba(0, 0, 0, 0.466);
+    margin:5px;
+    color:white;
+    
+}
 .featured-container
 {
     margin-top: 2em;

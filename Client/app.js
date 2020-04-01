@@ -1,5 +1,5 @@
 var temporaryImage = "https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-
+var apiUrl = "https://localhost:44325/api/movie";
 
 (function($){
     function processForm( e ){
@@ -47,9 +47,9 @@ function NavigateToLibraryView()
     let libraryView_html = GenerateLibraryViewHTML();
     DisplayView(libraryView_html);
 }
-function NavigateToDetailsView()
+async function NavigateToDetailsView(MovieId)
 {
-    let details_html = GenerateDetailsViewHTML();
+    let details_html = await GenerateDetailsViewHTML(MovieId);
     DisplayView(details_html);
 }
 /*
@@ -74,9 +74,37 @@ function GenerateLibraryViewHTML()
 {
 
 }
-function GenerateDetailsViewHTML()
+async function GenerateDetailsViewHTML(id)
 {
+    let movie = await GetMovieObjectById(id);
+    let card_img_html = `<div class="customCard-image">`+
+                        `<img id="MovieImage" class="card-top" alt="An Image" src="${movie.images[1].imageUrl}">`+
+                        `</div>`;
+    let card_body_html = `<div class="card-body">`+
+                        `<div class="card-title">`+
+                        `<h5 id="MovieTitle">${movie.movie.title}</h5>`+
+                        `</div>`+
+                        `<h5 id="MovieDirector">${movie.movie.director}</h3>`+
+                        `<h5 id="MovieGenre">${movie.movie.genre}</h3>`+
+                        `<p>Truncated Synopsis?</p>`+
+                        `</div>`;
+    let card_footer_html = `<div class="card-footer">`+
+    `<button type="button" class="btn btn-danger customCard-button" onclick="THEFUNCTIONGOESHERE()">Delete</button>`+
+    `</div>`;
+    let navigation_html = GenerateNavigationHTML();
 
+    let card_html = `<div class="row">`+
+    `<div class="contentContainerStyle DiplsayMovieCard-container">`+
+    `<div class="card customCard">`+
+    card_img_html+
+    card_body_html+
+    card_footer_html+
+    `</div>`+
+    navigation_html+
+    `</div>`+
+    `</div>`;
+
+    return card_html;
 }
 async function GenerateHomeViewHtml()
 {
@@ -84,7 +112,7 @@ async function GenerateHomeViewHtml()
     //start from the inside and work your way out.
     //in order:
         //Random Picker
-        let randomPicker_html = GenerateRandomPcikerHTML();
+        let randomPicker_html = await GenerateRandomPcikerHTML();
         //Add Featured Conetent
         let featuredFilm_html = await GenerateFeaturedFilmHTML();
         //Add Navigation
@@ -170,7 +198,7 @@ async function GenerateFeaturedFilmHTML()
     html = `<div class="featured-container">`+
             `${title}`+
             `<img id="featured-img" class="featured-img" src="${movie_obj.Images[0].imageUrl}">`+
-            `<button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button></div>`;
+            `<button id="featured-btn" type="button" class="btn btn-primary feautred-btn" onclick="NavigateToDetailsView(${movie_obj.movie.movieId})">See Featured Film Details</button></div>`;
     return html;
 }
 async function GetMovieObject()
@@ -190,6 +218,19 @@ async function GetMovieObject()
     
     return movie_obj;
 }
+async function GetMovieObjectById(id)
+{
+    let fullUrl = apiUrl+"/"+id;
+    let imagesUrl = apiUrl+`/movieid/${id}`;
+    let movies_obj = await jQuery.get(fullUrl);
+    let images_obj = await jQuery.get(imagesUrl);
+
+    let movie_obj = {movie: movies_obj, images: images_obj}
+    console.log(movie_obj);
+    return movie_obj;
+}
+
+
 function CreateCollectionOfMovies()
 {
     let MovieCollection = {Movies: [], Images: []};
@@ -197,28 +238,20 @@ function CreateCollectionOfMovies()
     MovieCollection.Movies.push(movie_obj);
     //Getting IDs
 }
-function GenerateRandomPcikerHTML()
+async function GenerateRandomPcikerHTML()
 {
     let randomCollection = [];
-    randomCollection = GenerateRandomCollection(4);
-    let title_html = `<div class="row"><div class="col-12"><div class="randompickHeader-container"><h1 class="randompickHeader">Random Picks</h1></div></div></div>`;
-    let radnom1_html = `<div class="row"><div class="col-6"><div class="randomtitle-container"><p class="randomPickTitle">${randomCollection[0]}</p></div></div><div class="col-6"><div class="randomtitle-container"><p class="randomPickTitle">${randomCollection[1]}</p></div></div></div>`;
-    let random2_html = `<div class="row"><div class="col-6"><div class="randomtitle-container"><p class="randomPickTitle">${randomCollection[2]}</p></div></div><div class="col-6"><div class="randomtitle-container"><p class="randomPickTitle">${randomCollection[3]}</p></div></div></div>`;
+    randomCollection = await GenerateRandomCollection();
+    let title_html = `<div class="row"><div class="col-12"><div class="randompickHeader-container"><h1 class="randompickHeader">Daily Picks</h1></div></div></div>`;
+    let radnom1_html = `<div class="row"><div class="col-6"><button type="button" class="random-pick-button" onclick="NavigateToDetailsView(${randomCollection[0].movieId})">${randomCollection[0].title}</button></div><div class="col-6"><button type="button" class="random-pick-button" onclick="NavigateToDetailsView(${randomCollection[1].movieId})">${randomCollection[1].title}</button></div></div>`;
+    let random2_html = `<div class="row"><div class="col-6"><button type="button" class="random-pick-button" onclick="NavigateToDetailsView(${randomCollection[2].movieId})">${randomCollection[2].title}</button></div><div class="col-6"><button type="button" class="random-pick-button" onclick="NavigateToDetailsView(${randomCollection[3].movieId})">${randomCollection[3].title}</button></div></div>`;
     let html = `<div class="randomPickContainer">${title_html}${radnom1_html}${random2_html}</div>`;
     return html;
 }
-function GenerateRandomCollection(NumberOfrandomPicks)
+async function GenerateRandomCollection()
 {
     //this is where we call an ajax get function;
-    let randomCollection = [];
-    for(let i = 0; i < NumberOfrandomPicks; i++)
-    {
-        //TODO:
-
-        //this is where we pull the collection from Ajax. 
-        //for testing
-        randomCollection[i] = i;
-    }
+    let randomCollection = await jQuery.get(apiUrl);
 
     return randomCollection;
 }
