@@ -132,4 +132,8 @@ function GenerateRandomCollection(NumberOfrandomPicks)
 function DisplayView(html)
 {
     document.getElementById("dynamicContent").innerHTML=html;
+
 }
+
+$("Delete").get()   
+
