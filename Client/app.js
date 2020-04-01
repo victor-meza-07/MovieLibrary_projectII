@@ -165,23 +165,30 @@ function GenerateNavigationHTML()
 async function GenerateFeaturedFilmHTML()
 {
     let html = ``;
-    let title = `<div class="featured-title-container"><h1 class="featured-title">Featured Film</h1></div>`;
     let movie_obj = await GetMovieObject();
+    let title = `<div class="featured-title-container"><h1 class="featured-title">${movie_obj.movie.title}</h1></div>`;
     html = `<div class="featured-container">`+
             `${title}`+
-            `<img id="featured-img" class="featured-img" src="${movie_obj.ImageURL}">`+
+            `<img id="featured-img" class="featured-img" src="${movie_obj.Images[0].imageUrl}">`+
             `<button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button></div>`;
     return html;
 }
 async function GetMovieObject()
 {
     //TESTING//
-    let sample_obj = await jQuery.get(`https://localhost:44325/api/movie`);
-    console.log("Outside the function", sample_obj);
-    let movieObject = {ImageURL: temporaryImage}
-    console.log(movieObject);
+    let movies_obj = await jQuery.get(`https://localhost:44325/api/movie`);
     
-    return movieObject;
+    let movieIndex = RandomInteger(1,movies_obj.length);
+    
+    let images_obj = await jQuery.get(`https://localhost:44325/api/movie/movieid/${movieIndex}`);
+    
+    console.log("movies_obj", movies_obj);
+    console.log("images_obj", images_obj);
+    
+    let movie_obj = {movie: movies_obj[movieIndex - 1], Images: images_obj}
+    console.log(movie_obj);
+    
+    return movie_obj;
 }
 function CreateCollectionOfMovies()
 {
@@ -219,7 +226,18 @@ function GenerateRandomCollection(NumberOfrandomPicks)
 function DisplayView(html)
 {
     document.getElementById("dynamicContent").innerHTML=html;
+}
 
+/**
+ * @param {Number} min 
+ * @param {Number} max
+ * @returns {Number} Returns a random number between min (inclusive) and max (exclusive) 
+ */
+function RandomInteger(min, max)
+{
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function DeleteMethod(){
