@@ -239,3 +239,15 @@ function RandomInteger(min, max)
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function DeleteMethod(){
+    movieId = $("#Movieid").val();
+    $.ajax({
+        url: "https://localhost:44325/api/movie/" + movieId,
+        method: "DELETE"
+    })
+}
+
+
+
+

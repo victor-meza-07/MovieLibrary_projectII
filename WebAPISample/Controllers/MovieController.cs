@@ -22,9 +22,9 @@ namespace WebAPISample.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<Movie> movies = _context.Movies.Where(s => s.MovieId > 0).ToList();
+            
             // Retrieve all movies from db logic
-            return Ok(movies);
+            return Ok(_context.Movies);
         }
 
         // GET api/movie/5
@@ -37,29 +37,36 @@ namespace WebAPISample.Controllers
             //sample logic
             var MovieReturned = _context.Movies.Where(a => a.MovieId == id).FirstOrDefault(); //returns a movie object
             var ImageForMovie = _context.MovieImages.Where(i => i.MovieId == MovieReturned.MovieId).FirstOrDefault();//returns an image collection. 
-            return Ok();
+            return Ok(MovieReturned);
         }
 
         // POST api/movie
         [HttpPost]
         public IActionResult Post([FromBody]Movie value)
         {
+            var movie = value;
+            _context.Add(movie);
+            _context.SaveChanges();
+               
             // Create movie in db logic
-            return Ok();
+            return Ok(movie);
         }
 
         // PUT api/movie
         [HttpPut]
         public IActionResult Put([FromBody] Movie movie)
-        {
+        { Movie movie1 = _context.Movies.Where(s => s.MovieId == movie.MovieId).FirstOrDefault();
+            movie1 = movie;
+            _context.Update(movie1);
+            _context.SaveChanges();
             // Update movie in db logic
-            return Ok();
+            return Ok(movie1);
         }
-
+        
         // DELETE api/movie/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-        {
+        /4{
             Movie movie = _context.Movies.Where(s => s.MovieId ==id).FirstOrDefault();
             _context.Remove(movie);
             _context.SaveChanges();
@@ -67,5 +74,18 @@ namespace WebAPISample.Controllers
             // Delete movie from db logic
             return Ok();
         }
+        [HttpGet("{id}")]
+        public IActionResult GetImage(int id)
+        {
+            // Retrieve image by id from db logic
+            // return Ok(image);
+
+            //sample logic
+           
+            var ImageForMovie = _context.MovieImages.Where(i => i.MovieId == id).ToList();//returns an image collection. 
+            return Ok(ImageForMovie);
+        }
+
+      
     }
 }
