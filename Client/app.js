@@ -169,7 +169,7 @@ async function GenerateFeaturedFilmHTML()
     let title = `<div class="featured-title-container"><h1 class="featured-title">${movie_obj.movie.title}</h1></div>`;
     html = `<div class="featured-container">`+
             `${title}`+
-            `<img id="featured-img" class="featured-img" src="${movie_obj.ImageURL}">`+
+            `<img id="featured-img" class="featured-img" src="${movie_obj.Images[0].imageUrl}">`+
             `<button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button></div>`;
     return html;
 }
@@ -178,17 +178,17 @@ async function GetMovieObject()
     //TESTING//
     let movies_obj = await jQuery.get(`https://localhost:44325/api/movie`);
     
-    let movieIndex = RandomInteger(0,2);
+    let movieIndex = RandomInteger(1,movies_obj.length);
     
-    let images_obj = await jQuery.getImage(`https://localhost:44325/api/movie/${movieIndex}`);
+    let images_obj = await jQuery.get(`https://localhost:44325/api/movie/movieid/${movieIndex}`);
     
     console.log("movies_obj", movies_obj);
     console.log("images_obj", images_obj);
     
-    let movie_obj = {movie: movies_obj[movieIndex], Images: images_obj}
+    let movie_obj = {movie: movies_obj[movieIndex - 1], Images: images_obj}
     console.log(movie_obj);
     
-    return movieObject;
+    return movie_obj;
 }
 function CreateCollectionOfMovies()
 {

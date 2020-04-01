@@ -74,8 +74,8 @@ namespace WebAPISample.Controllers
             // Delete movie from db logic
             return Ok();
         }
-        [HttpGet("{id}")]
-        public IActionResult GetImage(int id)
+        [HttpGet, Route("movieId/{id}")]
+        public IActionResult GETIMAGE(int id)
         {
             // Retrieve image by id from db logic
             // return Ok(image);
