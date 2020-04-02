@@ -256,6 +256,18 @@ function GetMovieFromTitle(){
     })
 
 }
+function Edit(){
+    $("#my-form").
+    <input type="text" name="title" placeholder="Title" />
+    <input type="text" name="director" placeholder="Director" />
+
+    <button type="submit">Submit</button>
+    </form>
+
+
+
+
+}
 
 
 
