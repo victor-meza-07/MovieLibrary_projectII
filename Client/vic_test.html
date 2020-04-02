@@ -23,38 +23,16 @@
     <!-- Dynamic Content Here -->
     <div class="container-fluid" id="dynamicContent">
         <!-- TEST CONTENT HERE -->
-        <div class="contentContainerStyle">
-            <div class="homeContainer">
-                <div class="randomPickContainer">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="randompickHeader-container">
-                                <h1 class="randompickHeader">Daily Picks</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="button" class="random-pick-button" onclick="NavigateToDetailsView()">Movie Title</button>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="random-pick-button" onclick="NavigateToDetailsView()">Movie Title</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="button" class="random-pick-button" onclick="NavigateToDetailsView()">Movie Title</button>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="random-pick-button" onclick="NavigateToDetailsView()">Movie Title</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-container">
-                    <img id="featured-img" class="featured-img" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg">
-                    <button id="featured-btn" type="button" class="btn btn-primary feautred-btn">See Featured Film Details</button>
-                </div>
+        <div class="dropdown">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+              
+            </button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item btn btn-warning" type="button">Edit</button>
+              <button class="dropdown-item btn btn-warning" type="button">Details</button>
+              <button class="dropdown-item btn btn-danger" type="button">Delete</button>
             </div>
+          </div>
         </div>
         <!-- END TEST CONTENT HERE -->
     </div>
@@ -194,6 +172,20 @@
             </div>
         </div>
     </div>
+-->
+
+<!-- DETAILS BUTTON -->
+<!-- 
+    <div class="dropdown">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+              
+            </button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item btn btn-warning" type="button">Edit</button>
+              <button class="dropdown-item btn btn-warning" type="button">Details</button>
+              <button class="dropdown-item btn btn-danger" type="button">Delete</button>
+            </div>
+          </div>
 -->
 
 <!-- LIBRARY HTML -->

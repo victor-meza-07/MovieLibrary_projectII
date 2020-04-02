@@ -42,9 +42,9 @@ function NavigateToSearchView()
     DisplayView(searchView_html);
 
 }
-function NavigateToLibraryView()
+async function NavigateToLibraryView()
 {
-    let libraryView_html = GenerateLibraryViewHTML();
+    let libraryView_html = await GenerateLibraryViewHTML();
     DisplayView(libraryView_html);
 }
 async function NavigateToDetailsView(MovieId)
@@ -70,9 +70,16 @@ function GenerateSearchViewHtml()
     let html = ``;
     return html;
 }
-function GenerateLibraryViewHTML()
+async function GenerateLibraryViewHTML()
 {
-
+    let navigation_html = GenerateNavigationHTML();
+    let movieCollection = await jQuery.get(apiUrl); // get the collection
+    let table_html = await GenerateSearch_tableHTML(movieCollection);//generate the table html
+    let container_html = `<div class="contentContainerStyle"><div class="homeContainer"><div class="custom-table-container">`+
+    table_html+
+    `</div></div></div>`+navigation_html;
+    
+    return container_html;
 }
 async function GenerateDetailsViewHTML(id)
 {
@@ -123,39 +130,46 @@ async function GenerateHomeViewHtml()
 }
 
 
-function GenerateTable_html(CollectionOfMovies, CollectionOfTableHead)
+function GenerateTable_html(CollectionOfMovies)
 {
-    let table_head = `<thead><tr>`;
-    for(let i =0; i < CollectionOfTableHead.length; i++)
-    {
-        tablehead += `<th>${CollectionOfTableHead[i]}</th>`;
-    }
-    tablehead += `</tr></thead>`;
+    let table_head = `<thead><tr>`+
+    `<th>Title</th>`+
+    `<th>Genre</th>`+
+    `<th style="visibility: hidden;">Details</th>`+
+    `</tr></thead>`;
 
 
     let table_body = `<tbody>`;
     let rows = CollectionOfMovies.length;
-    let columns = CollectionOfTableHead.length;
+    let columns = 3;
     for(let i = 0; i < rows; i++)
     {
         table_body += `<tr>`;
         for(let j = 0; j < columns; j++)
         {
-            let property = CollectionOfTableHead[j]; // will probably need something to parse out those properties exactly.
-            table_body += `<td>${CollectionOfMovies[i][property]}</td>`; // this line of code should access the specific property at n line. 
+            switch(j)
+            {
+                case 0:
+                    table_body += `<td>${CollectionOfMovies[i].title}</td>`;
+                    break;
+                case 1:
+                    table_body += `<td>${CollectionOfMovies[i].genre}</td>`;
+                    break;
+                case 2:
+                    table_body += `<td>${Generate_library_button_html(CollectionOfMovies[i].movieId)}</td>`;
+                    break;
+            } 
         }
         table_body += `</tr>`;
     }
     table_body += `</tbody>`;
 
-    let full_html = `${table_head, table_body}`;
+    let full_html = table_head + table_body;
     return full_html;
 }
-function GenerateSearch_tableHTML(CollectionOfMovies)
+async function GenerateSearch_tableHTML(CollectionOfMovies)
 {
-    let tablehead = ["Title","Details"];
-
-    let table_html = GenerateTable_html(CollectionOfMovies,tablehead);
+    let table_html = GenerateTable_html(CollectionOfMovies);
     let custom_table_html = `<table class="table-dark table-hover custom-table-style">${table_html}</div>`;
     let final_html = `<div class="row justify-content-center">${custom_table_html}</div>`;
     return final_html;
@@ -189,6 +203,19 @@ function GenerateNavigationHTML()
                 `<button class="navigation-btn" onclick="NavigateToLibraryView()"><i class="fa fa-list" aria-hidden="true"></i></button>`+
                 `</div></div></div></div>`;
     return html;
+}
+function Generate_library_button_html(id)
+{
+    let html = `<div class="dropdown">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+    </button>
+    <div class="dropdown-menu">
+      <button class="dropdown-item btn btn-warning" onclick="EDITFNGOESHERE(${id})" type="button">Edit</button>
+      <button class="dropdown-item btn btn-warning" onclick="NavigateToDetailsView(${id})" type="button">Details</button>
+      <button class="dropdown-item btn btn-danger" onclick="DELETEFNGOESHERE(${id})" type="button">Delete</button>
+    </div>
+  </div>`;
+    return html; 
 } 
 async function GenerateFeaturedFilmHTML()
 {

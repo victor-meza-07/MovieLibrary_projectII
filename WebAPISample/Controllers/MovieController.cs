@@ -85,7 +85,8 @@ namespace WebAPISample.Controllers
             var ImageForMovie = _context.MovieImages.Where(i => i.MovieId == id).ToList();//returns an image collection. 
             return Ok(ImageForMovie);
         }
-        [HttpGet("{title}")]
+        
+        [HttpGet, Route("movieTitle/{title}")]
         public IActionResult GetMovieFromTitle(string title)
         {
             // Retrieve movie by title from db logic
