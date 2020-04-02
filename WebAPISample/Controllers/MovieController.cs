@@ -52,17 +52,39 @@ namespace WebAPISample.Controllers
             return Ok(movie);
         }
 
+        [HttpPost, Route("movieId/images")]
+        public IActionResult Post([FromBody]MovieImagesModel value) 
+        {
+
+
+            var model = value;
+            _context.Add(model);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         // PUT api/movie
         [HttpPut]
         public IActionResult Put([FromBody] Movie movie)
         { Movie movie1 = _context.Movies.Where(s => s.MovieId == movie.MovieId).FirstOrDefault();
-            movie1 = movie;
-            _context.Update(movie1);
+            movie1.Director = movie.Director;
+            movie1.Genre = movie.Genre;
+            movie1.Title = movie.Title;
             _context.SaveChanges();
             // Update movie in db logic
             return Ok(movie1);
         }
-        
+
+        [HttpPut, Route("movieId/images")]
+        public IActionResult PutImages([FromBody] MovieImagesModel model) 
+        {
+            var model2 = _context.MovieImages.Where(a => a.PrimaryKey == model.PrimaryKey).FirstOrDefault();
+            model2.ImageUrl = model.ImageUrl;
+            _context.SaveChanges();
+            return Ok();
+        }
+
         // DELETE api/movie/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
@@ -85,7 +107,8 @@ namespace WebAPISample.Controllers
             var ImageForMovie = _context.MovieImages.Where(i => i.MovieId == id).ToList();//returns an image collection. 
             return Ok(ImageForMovie);
         }
-        [HttpGet("{title}")]
+        
+        [HttpGet, Route("movieTitle/{title}")]
         public IActionResult GetMovieFromTitle(string title)
         {
             // Retrieve movie by title from db logic

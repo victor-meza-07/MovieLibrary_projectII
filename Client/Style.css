@@ -105,6 +105,16 @@ body
 {
     text-align: center;
 }
+.random-pick-button
+{
+    border-radius: 20px;
+    font-size: 1em;
+    background-color: rgba(0, 0, 0, 0.466);
+    border-color: rgba(0, 0, 0, 0.466);
+    margin:5px;
+    color:white;
+    
+}
 .featured-container
 {
     margin-top: 2em;
@@ -211,3 +221,42 @@ body
     box-shadow: inset 3px 3px 5px #5d151c, inset -20px -20px 60px #ff4053;
 }
 /*END CARD STYLES*/
+
+/* EDIT VIEW STYLES */
+.edit-title-container
+{
+    text-align: center;
+}
+.edit-title
+{
+    font-family: MovieLover;
+    font-weight: 500;
+    font-size: 18pt;
+    color:white;
+}
+.edit-message
+{
+    color:white;
+    font-size: 14pt;
+}
+.edit-label
+{
+    color:white;
+}
+.edit-form-container
+{
+    margin-left: 35%;
+}
+.edit-button-container
+{
+    margin-top: 10px;
+}
+.edit-button-group
+{
+    margin: 20px;
+}
+.edit-image
+{
+    max-width:50%;
+    height: auto;
+}

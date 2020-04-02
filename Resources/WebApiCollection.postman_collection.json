@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "0a058cbe-575b-4ce4-8b75-263fddef332b",
+		"name": "WebApiCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:44325/api/movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44325/api/movie/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44325",
+					"path": [
+						"api",
+						"movie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44325/api/movie/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44325/api/movie/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44325",
+					"path": [
+						"api",
+						"movie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44325/api/movie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c5df31e-b1cc-4532-8f95-018ae35a7805",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"movieId\": 5,\n\t\"title\": \"A Good Day To Die Hard\",\n\t\"director\": \"John McTiernan\",\n\t\"genre\": \"Action\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44325/api/movie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44325",
+					"path": [
+						"api",
+						"movie"
+					]
+				},
+				"description": "This is the Put"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44325/api/movie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c5df31e-b1cc-4532-8f95-018ae35a7805",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Avengers\",\n\t\"director\": \"Victor Meza\",\n\t\"genre\": \"Action\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44325/api/movie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44325",
+					"path": [
+						"api",
+						"movie"
+					]
+				},
+				"description": "this is the post"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
