@@ -118,7 +118,7 @@ async function GenerateDetailsViewHTML(id)
                         `<p>Truncated Synopsis?</p>`+
                         `</div>`;
     let card_footer_html = `<div class="card-footer">`+
-    `<button type="button" class="btn btn-danger customCard-button" onclick="THEFUNCTIONGOESHERE()">Delete</button>`+
+    `<button type="button" class="btn btn-danger customCard-button" onclick="DeleteMethod(${movie.movie.movieId})">Delete</button>`+
     `</div>`;
     let navigation_html = GenerateNavigationHTML();
 
@@ -299,7 +299,7 @@ function Generate_library_button_html(id)
     <div class="dropdown-menu">
       <button class="dropdown-item btn btn-warning" onclick="NavigateToEditView(${id})" type="button">Edit</button>
       <button class="dropdown-item btn btn-warning" onclick="NavigateToDetailsView(${id})" type="button">Details</button>
-      <button class="dropdown-item btn btn-danger" onclick="DELETEFNGOESHERE(${id})" type="button">Delete</button>
+      <button class="dropdown-item btn btn-danger" onclick="DeleteMethod(${id})" type="button">Delete</button>
     </div>
   </div>`;
     return html; 
@@ -387,8 +387,8 @@ function RandomInteger(min, max)
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function DeleteMethod(){
-    movieId = $("#Movieid").val();
+function DeleteMethod(movieId){
+   
     $.ajax({
         url: "https://localhost:44325/api/movie/" + movieId,
         method: "DELETE"
@@ -403,18 +403,18 @@ function GetMovieFromTitle(){
     })
 
 }
-function Edit(){
-    $("#my-form").
-    <input type="text" name="title" placeholder="Title" />
-    <input type="text" name="director" placeholder="Director" />
-
-    <button type="submit">Submit</button>
-    </form>
 
 
+ 
+ 
+
+ 
+ 
 
 
-}
+
+
+
 
 
 //Helper Function
