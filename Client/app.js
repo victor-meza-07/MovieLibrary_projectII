@@ -57,6 +57,11 @@ async function NavigateToEditView(MovieId)
     let edit_html = await GenerateEditViewHtml(MovieId);
     DisplayView(edit_html);
 }
+async function NavigateToAddView()
+{
+    let add_html = await GenerateAddHtml();
+    DisplayView(add_html);
+}
 /*
 TODO:
 Add: NavigateTo Search/Library View and supporting generate methods
@@ -82,9 +87,19 @@ async function GenerateLibraryViewHTML()
     let navigation_html = GenerateNavigationHTML();
     let movieCollection = await jQuery.get(apiUrl); // get the collection
     let table_html = await GenerateSearch_tableHTML(movieCollection);//generate the table html
-    let container_html = `<div class="contentContainerStyle"><div class="homeContainer"><div class="custom-table-container">`+
-    table_html+
-    `</div></div></div>`+navigation_html;
+    let container_html = `<div class="contentContainerStyle">
+    <div class="homeContainer">
+        <div class="row justify-content-center">
+            <div class="col-2">
+                <h1 class="edit-title">Library</h1>
+            </div>    
+        </div>
+        <div class="row justify-content-center">
+            ${table_html}
+        </div>
+        ${navigation_html}
+    </div>
+</div>`;
     
     return container_html;
 }
@@ -175,6 +190,33 @@ async function GenerateEditHtml(movie)
     let html = `<div class="contentContainerStyle"><div class="homeContainer">${row1_html+row2_html+row3_html+row4_html+row5_html+row6_html+row7_html}</div>${navigation_html}</div>`;
     return html; 
 }
+async function GenerateAddHtml()
+{
+    let navigation_html = GenerateNavigationHTML();
+    let row1_html = `<div class="row"><div class="col-12 justify-content-center"><div class="edit-title-container"><h1 class="edit-title">ADD</h1></div></div></div>`;
+    let row2_html = `<div class="row"><div class="col-12 edit-title-container"><p class="edit-message">Here, you can edit your favorite movie's info.</p></div></div>`;
+    let row5_html = `<div class="row"><div class="col-12 edit-title-container"><label class="edit-label">Movie Info</label></div></div>`;
+    let row6_html = `<div class="row justify-content-center">
+    <form>
+        <label class="edit-label" for="edit_title">Title:</label>
+        <input type="text" class="form-control" placeholder="Enter Title" id="add_title">
+        <label class="edit-label" for="edit_director">Director:</label>
+        <input type="text" class="form-control" placeholder="Enter Director" id="add_director">
+        <label class="edit-label" for="edit_genre">Genre:</label>
+        <input type="text" class="form-control" placeholder="Enter Genre" id="add_genre">
+        <label class="edit-label" for="edit_img-url">Image URL:</label>
+        <input type="text" class="form-control" placeholder="Enter Image Url" id="add_img-url">
+    </form>
+</div>`;
+    let row7_html = `<div class="row justify-content-center edit-button-container">
+    <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-success edit-button-group" onclick="AddObject()">Save</button>
+    </div>
+</div>`;
+
+    let html = `<div class="contentContainerStyle"><div class="homeContainer">${row1_html+row2_html+row5_html+row6_html+row7_html}</div>${navigation_html}</div>`;
+    return html; 
+}
 function GenerateTable_html(CollectionOfMovies)
 {
     let table_head = `<thead><tr>`+
@@ -215,7 +257,7 @@ function GenerateTable_html(CollectionOfMovies)
 async function GenerateSearch_tableHTML(CollectionOfMovies)
 {
     let table_html = GenerateTable_html(CollectionOfMovies);
-    let custom_table_html = `<table class="table-dark table-hover custom-table-style">${table_html}</div>`;
+    let custom_table_html = `<table class="table-dark table-hover custom-table-style">${table_html}</table>`;
     let final_html = `<div class="row justify-content-center">${custom_table_html}</div>`;
     return final_html;
 }
@@ -378,7 +420,7 @@ async function EditMovieObject(movieId)
     if(title != ""){movie_obj.title = title;}
     if(director != ""){movie_obj.director = director;}
     if(genre != ""){movie_obj.genre = genre;}
-    if(url != ""){await EditImageObject(movie);}
+    if(url != ""){await EditImageObject(movie,url);}
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -400,10 +442,56 @@ async function EditMovieObject(movieId)
     NavigateToDetailsView(movieId);
 
 }
-async function EditImageObject(movie)
+async function EditImageObject(movie,urlString)
 {
-    let img_object = movie.images;
-    //make sure there's a put for this before calling anything.
+    let img_object = movie.images[0];
+    img_object.imageUrl = urlString;
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    let raw = JSON.stringify({"primaryKey":img_object.primaryKey,"movieId": img_object.movieId, "imageUrl":img_object.imageUrl});
+    
+    let requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    
+    await fetch("https://localhost:44325/api/movie/movieId/images", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+    
+}
+async function AddObject()
+{
+    const title = document.getElementById("add_title").value.trim();
+    const director = document.getElementById("add_director").value.trim();
+    const genre = document.getElementById("add_genre").value.trim();
+    const url = document.getElementById("add_img-url").value.trim();
+    
+    if(!(title == "") && !(director == "") && !(genre == "") && !(url == ""))
+    {
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let raw = JSON.stringify({"title":title,"director":director,"genre":genre});
+
+        let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        await fetch("https://localhost:44325/api/movie", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+    }//Only Add something if all fields are filled in.
 }
 
 

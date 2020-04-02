@@ -52,6 +52,18 @@ namespace WebAPISample.Controllers
             return Ok(movie);
         }
 
+        [HttpPost, Route("movieId/images")]
+        public IActionResult Post([FromBody]MovieImagesModel value) 
+        {
+
+
+            var model = value;
+            _context.Add(model);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         // PUT api/movie
         [HttpPut]
         public IActionResult Put([FromBody] Movie movie)
@@ -63,7 +75,16 @@ namespace WebAPISample.Controllers
             // Update movie in db logic
             return Ok(movie1);
         }
-        
+
+        [HttpPut, Route("movieId/images")]
+        public IActionResult PutImages([FromBody] MovieImagesModel model) 
+        {
+            var model2 = _context.MovieImages.Where(a => a.PrimaryKey == model.PrimaryKey).FirstOrDefault();
+            model2.ImageUrl = model.ImageUrl;
+            _context.SaveChanges();
+            return Ok();
+        }
+
         // DELETE api/movie/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
