@@ -36,9 +36,9 @@ async function NavigateToHomeView()
     let homeView_html = await GenerateHomeViewHtml();
     DisplayView(homeView_html);
 }
-function NavigateToSearchView()
+async function NavigateToSearchView()
 {
-    let searchView_html = GenerateSearchViewHtml();
+    let searchView_html = await GenerateSearchViewHtml();
     DisplayView(searchView_html);
 
 }
@@ -59,15 +59,17 @@ Add: .Get//Retrieve .Post//Add .Put//Edit and .remove//Delete methods
 */
 
 
-function GenerateSearchViewHtml()
+async function GenerateSearchViewHtml()
 {
+    let collection = await jQuery.get(apiUrl);
     let form_html = GenerateSearch_FormHtml();
-    let table_html = GenerateSearch_tableHTML();
+    let table_html = await GenerateSearch_tableHTML(collection);
     let div1_html = `<div class="search-container">${form_html}</div>`;
     let div2_html = ` <div class="custom-table-container">${table_html}</div>`;
+    let navigation_html = GenerateNavigationHTML();
 
 
-    let html = ``;
+    let html = `<div class="contentContainerStyle"><div class="homeContainer">${div1_html + div2_html + navigation_html}</div></div>`;
     return html;
 }
 async function GenerateLibraryViewHTML()
