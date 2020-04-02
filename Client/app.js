@@ -52,6 +52,11 @@ async function NavigateToDetailsView(MovieId)
     let details_html = await GenerateDetailsViewHTML(MovieId);
     DisplayView(details_html);
 }
+async function NavigateToEditView(MovieId)
+{
+    let edit_html = await GenerateEditViewHtml(MovieId);
+    DisplayView(edit_html);
+}
 /*
 TODO:
 Add: NavigateTo Search/Library View and supporting generate methods
@@ -130,8 +135,46 @@ async function GenerateHomeViewHtml()
     homeViewHtml = `<div class="contentContainerStyle"><div class="homeContainer">${randomPicker_html}${featuredFilm_html}${navigation_html}</div></div>`;
     return homeViewHtml;
 }
+async function GenerateEditViewHtml(id)
+{
+    let movie = await GetMovieObjectById(id);
+    let html = GenerateEditHtml(movie);
+    return html;
+}
 
 
+
+
+async function GenerateEditHtml(movie)
+{
+    let navigation_html = GenerateNavigationHTML();
+    let row1_html = `<div class="row"><div class="col-12 justify-content-center"><div class="edit-title-container"><h1 class="edit-title">Edit</h1></div></div></div>`;
+    let row2_html = `<div class="row"><div class="col-12 edit-title-container"><p class="edit-message">Here, you can edit your favorite movie's info.</p></div></div>`;
+    let row3_html = `<div class="row"><div class="col-12 edit-title-container"><label class="edit-label">Image</label></div></div>`;
+    let row4_html = `<div class="row"><div class="col-12 edit-title-container"><img class="edit-image" alt="An Image" src="${movie.images[0].imageUrl}"></div></div>`;
+    let row5_html = `<div class="row"><div class="col-12 edit-title-container"><label class="edit-label">Movie Info</label></div></div>`;
+    let row6_html = `<div class="row justify-content-center">
+    <form>
+        <label class="edit-label" for="edit_title">Title:</label>
+        <input type="text" class="form-control" placeholder="${movie.movie.title}" id="edit_title">
+        <label class="edit-label" for="edit_director">Director:</label>
+        <input type="text" class="form-control" placeholder="${movie.movie.director}" id="edit_director">
+        <label class="edit-label" for="edit_genre">Genre:</label>
+        <input type="text" class="form-control" placeholder="${movie.movie.genre}" id="edit_genre">
+        <label class="edit-label" for="edit_img-url">Image URL:</label>
+        <input type="text" class="form-control" placeholder="Image Url" id="edit_img-url">
+    </form>
+</div>`;
+    let row7_html = `<div class="row justify-content-center edit-button-container">
+    <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-danger edit-button-group" onclick="TODELETEMETHOD(${movie.movie.movieId})">Delete</button>
+        <button type="button" class="btn btn-success edit-button-group" onclick="EditMovieObject(${movie.movie.movieId})">Save</button>
+    </div>
+</div>`;
+
+    let html = `<div class="contentContainerStyle"><div class="homeContainer">${row1_html+row2_html+row3_html+row4_html+row5_html+row6_html+row7_html}</div>${navigation_html}</div>`;
+    return html; 
+}
 function GenerateTable_html(CollectionOfMovies)
 {
     let table_head = `<thead><tr>`+
@@ -212,7 +255,7 @@ function Generate_library_button_html(id)
     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
     </button>
     <div class="dropdown-menu">
-      <button class="dropdown-item btn btn-warning" onclick="EDITFNGOESHERE(${id})" type="button">Edit</button>
+      <button class="dropdown-item btn btn-warning" onclick="NavigateToEditView(${id})" type="button">Edit</button>
       <button class="dropdown-item btn btn-warning" onclick="NavigateToDetailsView(${id})" type="button">Details</button>
       <button class="dropdown-item btn btn-danger" onclick="DELETEFNGOESHERE(${id})" type="button">Delete</button>
     </div>
@@ -320,6 +363,47 @@ function GetMovieFromTitle(){
 }
 
 
+//Helper Function
+async function EditMovieObject(movieId)
+{
+    const movie = await GetMovieObjectById(movieId);
+    const title = document.getElementById("edit_title").value.trim();
+    const director = document.getElementById("edit_director").value.trim();
+    const genre = document.getElementById("edit_genre").value.trim();
+    const url = document.getElementById("edit_img-url").value.trim();
 
+    let movie_obj = movie.movie;
+
+    //assigning all non null values;
+    if(title != ""){movie_obj.title = title;}
+    if(director != ""){movie_obj.director = director;}
+    if(genre != ""){movie_obj.genre = genre;}
+    if(url != ""){await EditImageObject(movie);}
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    let raw = JSON.stringify({"movieId":movieId,"title":movie_obj.title,"director":movie_obj.director,"genre":movie_obj.genre});
+    
+    let requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    
+    await fetch("https://localhost:44325/api/movie", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+    NavigateToDetailsView(movieId);
+
+}
+async function EditImageObject(movie)
+{
+    let img_object = movie.images;
+    //make sure there's a put for this before calling anything.
+}
 
 
