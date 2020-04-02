@@ -44,12 +44,12 @@ namespace WebAPISample.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Movie value)
         {
-            var movie = value;
-            _context.Add(movie);
+            var movie1 = value;
+            _context.Movies.Add(movie1);
             _context.SaveChanges();
                
             // Create movie in db logic
-            return Ok(movie);
+            return Ok(movie1);
         }
 
         [HttpPost, Route("movieId/images")]

@@ -144,10 +144,11 @@ async function GenerateHomeViewHtml()
         let randomPicker_html = await GenerateRandomPcikerHTML();
         //Add Featured Conetent
         let featuredFilm_html = await GenerateFeaturedFilmHTML();
+        let addButton_html = await GenerateAddButoonHtml();
         //Add Navigation
         let navigation_html = GenerateNavigationHTML();
     
-    homeViewHtml = `<div class="contentContainerStyle"><div class="homeContainer">${randomPicker_html}${featuredFilm_html}${navigation_html}</div></div>`;
+    homeViewHtml = `<div class="contentContainerStyle"><div class="homeContainer">${randomPicker_html}${featuredFilm_html+addButton_html}${navigation_html}</div></div>`;
     return homeViewHtml;
 }
 async function GenerateEditViewHtml(id)
@@ -159,7 +160,11 @@ async function GenerateEditViewHtml(id)
 
 
 
-
+async function GenerateAddButoonHtml()
+{
+    let html = `<button type="button" class="btn btn-success" onclick="NavigateToAddView()">Add A Movie</button>`;
+    return html; 
+}
 async function GenerateEditHtml(movie)
 {
     let navigation_html = GenerateNavigationHTML();
@@ -499,11 +504,36 @@ async function AddObject()
         redirect: 'follow'
         };
 
+        let result = {};
+
         await fetch("https://localhost:44325/api/movie", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
+        
     }//Only Add something if all fields are filled in.
+}
+
+async function AddImage(movieId)
+{
+    let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let raw = JSON.stringify({"movieId":movieId, "imageUrl": url});
+
+        let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        await fetch("https://localhost:44325/api/movie/movieId/images", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+    NavigateToEditView(movieId);
 }
 
 
